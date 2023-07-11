@@ -1,0 +1,135 @@
+#include <iostream>
+using namespace std;
+#include <cmath>
+#include <algorithm>
+#include <iomanip>
+
+/*
+Write a program that will be used to gather statistical data about the number of movies college students see in a month.
+The program should ask the user how many students were surveyed and dynamically allocate an array of that size.
+The program then should allow the user to enter the number of movies each student has seen.
+It should then sort the scores and calculate the average.
+
+Modularity:
+Main:  The main function should accept the number of students from the user
+and dynamically create an array large enough to contain number of movies watched for each student.
+Input validation:  The number of students should be a positive integer.
+Print the average and free the allocated array when complete.
+Get the data.  This function should get the number of movies watched by each college student.
+Input validation:  The number of movies should be a positive integer.
+Sort the data.  This function should sort the array in ascending order.
+Note you may use the Standard Template Library sort function or your own sort function.
+To use the STL sort:
+o	Add #include <algorithm> to your program
+o	sort (arrayname, arrayname + size of array) (beginning and ending elements)
+Display: This function should display the sorted list of the number of movies watched.
+Average: This function should be a value-returning function that calculates the average of the movies watched
+and returns it to the main function.
+
+Sample Output:
+
+Number of Movies Watched
+------------------------
+75
+81
+88
+---------
+Average  81.3
+
+Requirements: Your array must be dynamically allocated.
+In passing your array to functions, you must declare the array parameter using pointer notation
+instead of array notation, and inside each function you must use pointer notation
+instead of array notation to access the array elements.
+
+*/
+
+void getNumMovies(double *movies, int size);
+void displayMovies(double *movies, int size);
+void selectionSort(double *movies, int size);
+double totalMovies(double *movies, int size);
+
+int main()
+{
+	int SIZE;
+	double average;
+	cout << "Enter number of students: ";
+	cin >> SIZE;
+	while(SIZE < 0){
+		cerr <<"No negative values allowed. :";
+		cout <<"Re-enter value. ";
+		cin >> SIZE;
+	}
+
+	double movies[SIZE];
+
+	getNumMovies(movies,SIZE);
+	cout << "Number of movies watched: " << endl;
+	cout << "===========================" << endl;
+	selectionSort(movies,SIZE);
+	displayMovies(movies,SIZE);
+
+	cout << totalMovies(movies,SIZE) << endl;
+	cout << "===========================" << endl;
+	average = static_cast<double>(totalMovies(movies,SIZE)) / SIZE;
+	cout << "The average number of movies each student watched was: " << average;
+
+	return 0;
+}
+
+void getNumMovies(double *movies, int size)
+{
+	for(int count = 0; count < size; count++){
+		cout << "Enter number of movies each student watched: ";
+		cout << (count + 1) << ": ";
+		cin >> movies[count];
+		while (movies[count] < 0)
+				{
+					cerr <<"No negative values allowed. :";
+					cout <<"Re-enter value. ";
+					cin >> movies[count];
+				}
+	}
+}
+double totalMovies(double *movies, int size)
+{
+	double sum = 0;
+
+	for(int count = 0; count < size; count++){
+		sum += *movies;
+		movies++;
+	}
+	return sum;
+}
+
+
+
+void selectionSort(double *movies, int size)
+{
+	int min_index;
+	int min_value;
+
+	for(int start_index = 0; start_index < (size-1);start_index++){
+			min_index = start_index;
+			min_value = movies[start_index];
+
+			for(int index = start_index + 1; index < size; index++){
+				if(movies[index] < min_value){
+					min_value = movies[index];
+					min_index = index;
+				}
+			}
+			swap(movies[min_index], movies[start_index]);
+		}
+}
+
+void displayMovies(double *movies, int size){
+	for(int count = 0; count < size; count++){
+		cout << movies[count] << "\n";
+	}
+}
+void swap(int &a, int &b)
+{
+	int temp = a;
+	a = b;
+	b = temp;
+}
