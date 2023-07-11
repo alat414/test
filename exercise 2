@@ -1,0 +1,66 @@
+/*
+A software company sells a package that retails for $199.
+Quantity discounts are given according to the following table:
+
+10-19	20%
+20-49	30%
+50-99	40%
+100 or more	50%
+
+The program should run the following:
+How many units are being purchased?
+The total cost of the purchase is:
+ */
+#include <iostream>
+using namespace std;
+using std::cin;
+using std::cout;
+
+int main()
+{
+	int number_packages;
+	float priceone = 159.2;
+	float pricetwo = 139.3;
+	float pricethree = 119.4;
+	float pricefour = 99.5;
+
+	// Prompt user
+	cout << "Hello, enter number of packages to be purchased.";
+
+	cin >> number_packages;
+
+
+
+	if ((number_packages >= 1) && (number_packages < 10))
+	{
+		cout << "How many units are being purchased?" << number_packages;
+		cout << "\n" << "The total cost of the purchase is " << number_packages * 199;
+	}
+	else if ((number_packages >= 10) && (number_packages <= 19))
+	{
+		cout << "How many units are being purchased?" << number_packages;
+		cout << "\n" << "The total cost of the purchase is $" << number_packages * priceone;
+	}
+	else if (number_packages >= 20 && number_packages <= 49)
+	{
+		cout << "How many units are being purchased?" << number_packages;
+		cout << "\n" << "The total cost of the purchase is " << number_packages * pricetwo;
+	}
+	else if (number_packages >= 50 && number_packages <= 99)
+	{
+		cout << "How many units are being purchased?" << number_packages;
+		cout << "\n" << "The total cost of the purchase is " << number_packages * pricethree;
+	}
+	else if (number_packages >= 100)
+	{
+		cout << "How many units are being purchased?" << number_packages;
+		cout << "\n" << "The total cost of the purchase is " << number_packages * pricefour;
+	}
+	else
+	{
+		cerr << "No negative quantity." << endl;
+		cout << "Re-enter quantity." << endl;
+		cin >> number_packages;
+	}
+	return 0;
+}
