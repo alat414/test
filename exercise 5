@@ -1,0 +1,161 @@
+#include <iostream>
+using namespace std;
+#include <string>
+
+/*
+ The city of Paris, Texas tracks how much water is consumed by its citizens on a monthly basis.
+ The City Manager would like statistics about the consumption.
+ She would like to know the months with the highest and lowest consumption, the yearly average, and the yearly total.
+  NOTE:  Water consumption is measured in CCF (centum cubic feet)
+The main function should:
+Create an array to store the twelve months of consumption.
+Call the following functions, passing the array to all but the print headers function:
+
+1.	Get data from user:
+ The function should use a loop to ask the user for the amount consumed for 12 months,
+ using the appropriate month name and store the data in the consumption array.
+
+     Input Validation: Do not accept negative numbers.
+   Your screen dialog might look similar to this (user input is shown in bold):
+Enter water consumption in CCF for January: 500000
+Enter water consumption in CCF for February: 400000
+Etc....
+
+2.	Print the headers:  which should ask for the year of the report to be displayed in the header and print the headers.
+Input Validation: The year should be validated to be between 2005 and 2020.
+
+3.	Display the consumption:  Using the data from the consumption array,
+display the consumption for the year for each month with appropriate month labels.
+
+4.	Get lowest consumption:  Using the data from the consumption array,
+determine the month with the lowest consumption, print the month name
+and the amount of the consumption for that month.
+
+5.	Get highest consumption:  Using the data from the consumption array,
+determine the month with the lowest consumption, print the month name
+and the amount of the consumption for that month.
+
+6.	Get total and average consumption:  Using the data from the consumption array calculate the total
+and average of all months for the year and print them.
+
+***********************************************
+Sample Output
+	20XX Consumption Report for Paris, Texas
+Month	Consumption in CCF
+January 500000
+February 250000
+Etc...
+
+The lowest consumption was in MONTH with ____ CCF
+The highest consumtion was in MONTH with ____ CCF
+The total consumption for the year was: ____ CCF
+The average consumption for the year was: ____CCF.
+***********************************************
+
+Modularity Your program must be a modular program.
+Your main function should not contain any loops.
+It should call all of the functions described above, calling a total of 6 functions
+Additional Requirements:
+1.	Do not use global variables in any assignment.
+A global variable is a variable that is declared outside any function.
+It is okay to use global constants.
+2.	When passing the array to a function that does not modify it,
+use the const keyword to prevent any modification to the array.
+*/
+
+const int NUM_MONTHS = 12;
+
+
+void getInput(double arr[]);
+void printArray(double arr[], string names[]);
+int getHighest (double arr[]);
+int getLowest (double arr[]);
+
+int main()
+{
+	int year;
+	int lowestMonth;
+	int highestMonth;
+	double numbers[NUM_MONTHS];
+	string names[NUM_MONTHS] = {
+			"January",
+			"February",
+			"March",
+			"April",
+			"May",
+			"June",
+			"July",
+			"August",
+			"September",
+			"October",
+			"November",
+			"December"};
+
+	cout << "Enter the year :";
+	cin >> year;
+	cout << "\n" << year << " Consumption report for Paris, Texas." << "\n";
+	getInput(numbers);
+	cout << "\n" <<" MONTH    CONSUMPTION IN CCF " << "\n";
+	printArray(numbers, names);
+	highestMonth = getHighest(numbers);
+	lowestMonth = getLowest(numbers);
+	cout << "\nThe lowest consumption was in " << names[lowestMonth] << " with " << numbers[lowestMonth] << " CCF.";
+	cout << "\nThe highest consumption was in" << names[highestMonth] << " with " << numbers[highestMonth] << " CCF.";
+
+	return 0;
+}
+
+void getInput(double arr[])
+{
+	for(int i = 0; i < NUM_MONTHS; i++){
+		cout << "Enter the water consumption for the month " << i+1 << ":";
+		cin >> arr[i];
+		while (arr[i] < 0)
+		{
+			cerr <<"No negative values allowed. :";
+			cout <<"Re-enter value. ";
+			cin >> arr[i];
+		}
+	}
+}
+void printArray(double arr[], string names[])
+{
+	double totalUseAmount, averageUseAmount;
+	totalUseAmount = 0;
+	for(int i = 0; i < NUM_MONTHS; i++){
+		totalUseAmount += arr[i];
+		cout << names[i] << " " << arr[i] <<" \n";
+	}
+
+	averageUseAmount = totalUseAmount / NUM_MONTHS;
+
+	cout << "The total consumption for the year was " << totalUseAmount << " CCF.";
+	cout << "\n";
+	cout << "The average consumption per month was " << averageUseAmount << " CCF.";
+
+}
+
+int getHighest(double arr[])
+{
+	int highestIndex = 0;
+	double highest = arr[0];
+	for (int i = 0; i < NUM_MONTHS; i++){
+		if (arr[i] > highest){
+			highest = arr[i];
+			highestIndex = i;
+		}
+	}
+	return highestIndex;
+}
+int getLowest(double arr[])
+{
+	int lowestIndex = 0;
+	double lowest = arr[0];
+	for (int i = 0; i < NUM_MONTHS; i++){
+		if (arr[i] < lowest){
+			lowest = arr[i];
+			lowestIndex = i;
+		}
+	}
+	return lowestIndex;
+}
