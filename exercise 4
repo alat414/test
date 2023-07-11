@@ -1,0 +1,91 @@
+/*
+ *   Population Class – Write a class called Population that stores current population,
+ *    annual number of births, and an annual number of deaths for some geographic area with the following specifications:
+Member Variables - Private
+Integers to store the current population, number of births, and number of deaths
+Member Functions - Public:
+1.	Default Constructor with no parameters:  Initialize Population to 2 and number of births and deaths to 0.
+2.	Constructor with three parameters.  The constructor should be passed the current population, number of births, and number of deaths for the Population object.
+3.	 “Set” member function for each of the three member variables.
+If a population figure less than 2 is passed to the class, use a default value of 2.
+If a birth or death figure less than 0 is passed, use a default value of 0.
+4.	getBirthrate member function.  This function should calculate Birthrate based on the following formula:
+a.	Birth rate = Number of Births / Population
+
+5.	getDeathrate member function.  This function should calculate deathrate based on the following formula:
+a.	Death rate = Number of Deaths / Population
+Note:  As noted in the textbook, generally it is best not to do any input or output in member functions.
+Testing
+Write a main function to test your class.  Be sure that your output shows that each of your member functions works.
+ *     Be sure to test with invalid as well as valid data.
+ */
+#include<iostream>
+using namespace std;
+
+class Population
+{
+private:
+	int population, number_of_births, number_of_deaths;
+public:
+	Population();
+	Population(int _population, int _number_of_births, int _number_of_deaths);
+	double getBirthRate();
+	double getDeathRate();
+	void set(int _population, int _number_of_births, int _number_of_deaths);
+};
+
+Population::Population()
+{
+	population = 2;
+	number_of_births = 0;
+	number_of_deaths = 0;
+}
+Population::Population(int _population, int _number_of_births, int _number_of_deaths)
+{
+	set (_population,_number_of_births,_number_of_deaths);
+
+}
+void Population::set(int _population, int _number_of_births, int _number_of_deaths)
+{
+	if (_population < 2)
+	{
+		population = 2;
+	}
+	else
+	{
+		population = _population;
+	}
+	if (_number_of_births < 0 || _number_of_deaths < 0)
+	{
+		number_of_births = 0;
+		number_of_deaths = 0;
+	}
+	else
+	{
+		number_of_births = _number_of_births;
+		number_of_deaths = _number_of_deaths;
+	}
+}
+double Population::getBirthRate()
+{
+	double birth_rate = number_of_births / static_cast<double>(population);
+	return birth_rate;
+}
+
+double Population::getDeathRate()
+{
+	double death_rate = number_of_deaths / static_cast<double>(population);
+	return death_rate;
+}
+int main()
+{
+	cout << "This is the rate for both births and deaths based on the given data." << endl;
+
+	Population pop (1500123,256,132);
+
+	cout << "The birth rate is: " << pop.getBirthRate() << endl;
+	cout << "The death rate is :" << pop.getDeathRate() << endl;
+	cout << "Done" << endl;
+	return 0;
+
+}
