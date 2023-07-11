@@ -1,0 +1,56 @@
+/*
+Winning Division – Write a program that determines which of a company’s four divisions
+(Northeast, Southeast, Northwest, and Southwest) had the greatest sales for a quarter.
+It should include two functions that are called by main:  getSales and findHighest.
+Modularity:
+main – will call the getSales function 4 times, passing it the division name,
+each time getting the quarterly sales from a different division.
+It will then call the findHighest function, passing it the four sales figures,
+which will determine and display the highest.
+getSales –   will accept input of the quarterly sales from the user,
+using the division name passed by main to prompt the user.
+It will return the quarterly sales amount to main.
+Input validation – Validate that the sales amount entered is greater than zero.
+findHighest – will accept the four sales figures from each division as parameters
+and determine which is the highest of the four.
+It will display the division name and amount that is the highest.
+
+ */
+
+#include<iostream>
+using namespace std;
+
+void enterSales(float northEastDivision, float southEastDivision, float northWestDivision, float southWestDivision);
+int main()
+{
+	float northEastDivision, southEastDivision, northWestDivision, southWestDivision, largest;
+	cout << "Enter northEastDivision sales: ";
+	cin >> northEastDivision;
+	cout << "Enter Southeast division sales: ";
+	cin >> southEastDivision;
+	cout << "Enter Northwest division sales: ";
+	cin >> northWestDivision;
+	cout << "Enter Southwest division sales: ";
+	cin >> southWestDivision;
+
+	cout << "\nNortheast division sales were $" << northEastDivision;
+	cout << "\nSoutheast division sales were $" << southEastDivision;
+	cout << "\nNorthwest division sales were $" << northWestDivision;
+	cout << "\nSouthWest division sales were $" << southWestDivision;
+
+	enterSales(northEastDivision, southEastDivision, northWestDivision, southWestDivision);
+
+	return 0;
+}
+void enterSales(float northEastDivision, float southEastDivision, float northWestDivision, float southWestDivision)
+{
+	if (northEastDivision > southEastDivision && northEastDivision > northWestDivision && northEastDivision > southWestDivision)
+		cout << "\nThe Northeast division had the highest sales this quarter." << "\nThey had $" << northEastDivision << " in sales." << endl;
+	else if (southEastDivision > northEastDivision && southEastDivision > northWestDivision && southEastDivision > southWestDivision)
+		cout << "\nThe Southeast division had the highest sales this quarter." << "\nThey had $" << southEastDivision << " in sales." << endl;
+	else if (northWestDivision > northEastDivision && northWestDivision > southEastDivision && northWestDivision > southWestDivision)
+		cout << "\nThe Northwest division had the highest sales this quarter." << "\nThey had $" << northWestDivision << " in sales." << endl;
+	else if (southWestDivision > northEastDivision && southWestDivision > southEastDivision && southWestDivision > northWestDivision)
+		cout << "\nThe Southwest division had the highest sales this quarter." << "\nThey had $" << southWestDivision << " in sales." << endl;
+
+}
