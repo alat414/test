@@ -1,1 +1,32 @@
+/*
+ * AlatristeLab1pt2.cpp
+ *
+ *  Created on: May 1, 2023
+ *      Author: gusta
+ */
 
+/*
+
+A star player of a high school basketball team is 74 inches tall.
+Write a program to compute and display the height in feet/inches form.
+*/
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int total;
+
+
+	cout << "Enter the height in inches. ";
+	cin >> total;
+
+	int feet = total / 12;
+	int inches = total % 12;
+
+	cout << "A " << total << " inch tall basketball player is " << feet << " feet " << inches << " inches tall.";
+
+
+	return 0;
+
+}
